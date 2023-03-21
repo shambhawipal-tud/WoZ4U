@@ -18,6 +18,7 @@ lock_anim_speech_section: "false"
 lock_volume_section: "false"
 lock_audio_section: "false"
 lock_gesture_section: "false"
+lock_anim_speech_gesture_section: "false"
 lock_color_section: "false"
 lock_eye_anim_section: "false"
 
@@ -36,7 +37,7 @@ autonomous_life_config:
   arms_breathing: True
   body_breathing: True
   legs_breathing: True
-  listening_movement: False
+  listening_movement: True
   speaking_movement: True
 
 default_head_turn_deg: 20 # head turn increment
@@ -201,6 +202,15 @@ gestures: # Buttons will be created for every item in the list
     gesture: "animations/Stand/Emotions/Positive/Happy_4"
     tooltip: "blah"
     key_comb: ["shift", "7"]
+
+speech_and_gestures: #Paint pal features
+  -
+    title: "Hello"
+    string: "Hello Buddy! How are you?"
+    gesture: "animations/Stand/Gestures/Hey_3"
+    tooltip_s: "Plain message without annotations"
+    tooltip_g: "Hey_3 gesture"
+    key_comb: [ "ctrl", "1" ]
 
 colors:
   # Color values for eye leds that should be accessable from the interface

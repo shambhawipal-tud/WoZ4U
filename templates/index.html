@@ -288,6 +288,9 @@
             if ({{ config["lock_gesture_section"] }}) {
                 $("#gesture_div *").prop("disabled", true);
             }
+            if ({{ config["lock_anim_speech_gesture_section"] }}) {
+                $("#animated_speech_gesture_div *").prop("disabled", true);
+            }
             if ({{ config["lock_color_section"] }}) {
                 $("#colors_div *").prop("disabled", true);
             }
@@ -611,6 +614,11 @@
 
                 update_states()
             });
+        }
+
+        function exec_speech_with_gesture(name_s,index_s, name_g,index_g) {
+            exec_anim_speech(name_s, index_s);
+            exec_gesture(name_g, index_g);
         }
 
         function exec_custom_gesture() {
@@ -1889,7 +1897,59 @@
             <span>Motion Vector: <span id="motion_vector">[0, 0, 0]</span></span>
 
         </div>
-        <br>
+
+        <!-- COLUMN 5: SPEECH with Animation-->
+        <div style="width: 50%; float: left;" id="animated_speech_gesture_div">
+
+            <a href="http://doc.aldebaran.com/2-5/naoqi/audio/alanimatedspeech.html" target="blank">
+                <h3 style="margin-bottom: 5px;">Animated speech</h3>
+            </a>
+
+            {% for anim_speech in config["animated_speech"] %}
+                <div class="row">
+                    <div class="speech_lbl_wrapper">
+                        <span>{{ anim_speech["title"] }}</span>
+                    </div>
+                    <div class="speech_btn_wrapper">
+                        <button
+                                title="{{ anim_speech['tooltip'] }}"
+                                class="example_c capitalize"
+                                id="anim_speech_btn_{{ loop.index0 }}"
+                                default_text="
+                                    {% if (anim_speech["key_comb"] is defined) and  anim_speech["key_comb"] %}
+                                        {{ anim_speech["key_comb"]|safe|prettyshortcut }}
+                                    {% else %}
+                                        EXECUTE
+                                    {% endif %}"
+                                onclick="exec_anim_speech('{{ anim_speech["title"] }}', {{ loop.index0 }})">
+                            {% if (anim_speech["key_comb"] is defined) and  anim_speech["key_comb"] %}
+                                {{ anim_speech["key_comb"]|safe|prettyshortcut }}
+                            {% else %}
+                                EXECUTE
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+                <br>
+
+                <!-- add the keyboard shortcut to the button, if the flag has been given-->
+                {% if (anim_speech["key_comb"] is defined) and  anim_speech["key_comb"] %}
+                    <script>
+                        // https://stackoverflow.com/questions/10503981/check-if-an-array-is-not-empty-in-jinja2
+                        // https://stackoverflow.com/questions/15321431/how-to-pass-a-list-from-python-by-jinja2-to-javascript
+                        add_keyboard_shortcut({{ anim_speech["key_comb"]|safe }}, "anim_speech_btn_{{loop.index0}}")
+                    </script>
+                {% endif %}
+            {% endfor %}
+
+            <div class="row">
+                <span>Direct message:</span>
+                <input type="text" placeholder="Type custom message here..." id="custom_text_msg" class="text_input">
+                <button class="example_c" onclick="say_custom_text()" id="custom_text_btn">SAY IT</button>
+            </div>
+            <br>
+
+        </div>
 
         <!-- COLUMN 1: EYE LEDS-->
         <div style="width: 50%; float: left;" id="colors_div">
