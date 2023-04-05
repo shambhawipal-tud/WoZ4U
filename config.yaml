@@ -1,5 +1,6 @@
 pepper_ips:  # Entry in dropdown menu will be create for every list item
   - 192.168.100.166
+ # - 192.168.100.162
 
 
 camera_save_dir: record_imgs  # relative folder on host machine, images form camera feed will be saved here
@@ -14,7 +15,10 @@ audio_save_dir: /home/nao/ # absolute path on pepper robot, you'll have scp or p
 lock_autonomous_life_section: "false"
 lock_movement_control_section: "false"
 lock_tablet_section: "false"
-lock_anim_speech_section: "false"
+lock_anim_speech_section_1: "false"
+lock_anim_speech_section_2: "false"
+lock_anim_speech_section_3: "false"
+lock_anim_speech_section_4: "false"
 lock_volume_section: "false"
 lock_audio_section: "false"
 lock_gesture_section: "false"
@@ -52,87 +56,207 @@ default_drive_dist : 10  # move increment
 tablet_root_location: static/tablet_items/  # place image or video files here, on host machine
 tablet_items:
   -
-    title: Timeline
-    file_name: climate_change.jpg
-    key_comb: ["ctrl", "shift", 1]  # example for more complex shortcut
-  - 
-    title: Landscape
-    file_name: landscape.jpg
-    key_comb: ["ctrl", "shift", 2]
+    title: Abstract
+    file_name: abstract.png
+    key_comb: [ "ctrl", "shift", 1 ]  # example for more complex shortcut
+
   -
-    title: Umea logo
-    is_default_img: True  # image with this flag will be displayed on connect
-    file_name: umea_logo.png
-    key_comb: ["ctrl", "shift", 3]
+    title: Kubist
+    file_name: kubist.png
+    key_comb: [ "ctrl", "shift", 2 ]  # example for more complex shortcut
+
   -
-    title: Arrow keys
-    file_name: arrow_keys.png
-    key_comb: ["ctrl", "shift", 4]
+    title: Van Gogh
+    file_name: vanGogh.png
+    key_comb: [ "ctrl", "shift", 3 ]  # example for more complex shortcut
+
   -
-    title: Sound playing
-    file_name: sound_playing.png
-    key_comb: ["ctrl", "shift", 5]
-  - 
-    title: Local video  # Videos can also be played 
-    file_name: mov_bbb.mp4  # file stored on host machine
-    key_comb: ["ctrl", "shift", 6]
-  - 
-    title: Remote video
-    file_name: http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4  # Remote file also possible, just put URL here
-    key_comb: ["ctrl", "shift", 7]
-  - 
-    title: Website  # We can also show a website on Pepper's tablet
-    file_name: https://www.google.com/  # Also just put URL to website here
-    key_comb: ["ctrl", "shift", 8]
+    title: Impressionist
+    file_name: impressionist.png
+    key_comb: [ "ctrl", "shift", 4 ]  # example for more complex shortcut
+
   -
-    title: Confused cat
-    file_name: https://i.kym-cdn.com/photos/images/facebook/001/564/773/6cf.jpg
-    key_comb: ["ctrl", "shift", 9]
+    title: Renaissance
+    file_name: renaissance.png
+    key_comb: [ "ctrl", "shift", 5 ]  # example for more complex shortcut
+
+  - title: Memory
+    file_name: memory.jpg
+    key_comb: [ "ctrl", "shift", 6 ]  # example for more complex shortcut
 
 
-animated_speech:
+initiate_conversation:
     # Avoid special characters in messages, this can break the backend.
     # EG: Instead if a ', put &apos; into the message, which is the HTML symbol for the apostroph
   -
-    title: Plain  # This will be shown in the GUI
+    title: Hi! Do you wanna paint  # This will be shown in the GUI
+    string: "Hi there! I'm PaintPal. It is such a nice day today. Do you want to paint?"  # message pepper will say
+    tooltip: "Plain message without annotations"  # tooltip for the button in UI
+    key_comb: ["ctrl", "q"]  # keyboard shortcut for this action
+
+  -
+    title: If No to paint
+    string: "That's too bad. are you sure? We could make something to show your loved ones when they visit."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "w" ]  # keyboard shortcut for this action
+
+  -
+    title: If still no to paint
+    string: "Alright, take care. I'm here if you need me."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "e" ]  # keyboard shortcut for this action
+
+  -
+    title: If Yes to paint
+    string: "Do you want to draw with a pencil or use water colors?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "r" ]  # keyboard shortcut for this action
+
+  -
+    title: If no options
+    string: "Sorry we only have these two mediums to paint now."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "t" ]  # keyboard shortcut for this action
+
+  -
+    title: if available - no watercolor
+    string: "Do you have the drawing tools in front of you?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "y" ]  # keyboard shortcut for this action
+
+  -
+    title: if available - watercolor
+    string: "Do you have the drawing tools and colors in front of you?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "u" ]  # keyboard shortcut for this action
+
+  -
+    title: now available - no watercolor
+    string: "You should have a paper and a pencil."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "i" ]  # keyboard shortcut for this action
+
+  -
+    title: now available - watercolor
+    string: "You should have a paper, a paint brush, some colors and water."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "o" ]  # keyboard shortcut for this action
+
+  -
+    title: if unavailable
+    string: "Let me have the caretaker bring it for you."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "p" ]  # keyboard shortcut for this action
+
+  -
+    title: ready
+    string: "Now that we have everything ready, lets decide on what we want to paint today."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "a" ]  # keyboard shortcut for this action
+
+
+painting_style:
+    # Avoid special characters in messages, this can break the backend.
+    # EG: Instead if a ', put &apos; into the message, which is the HTML symbol for the apostroph
+  -
+    title: Ask style  # This will be shown in the GUI
+    string: "Do you already have an art style in mind? Or would you like some suggestions?"  # message pepper will say
+    tooltip: "Plain message without annotations"  # tooltip for the button in UI
+    key_comb: ["ctrl", "s"]  # keyboard shortcut for this action
+
+  -
+    title: Ask Abstract
+    string: "Do you want to try the Abstract style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "d" ]  # keyboard shortcut for this action
+
+  -
+    title: Show Abstract
+    string: "Here is an example of abstract modern style of painting.Abstract art is art that does not attempt to represent an accurate depiction of a visual reality but instead use shapes, colours, forms and gestural marks to achieve its effect. Here is an example."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "f" ]  # keyboard shortcut for this action
+
+  -
+    title: Ask Kubist
+    string: "Do you want to try the Kubist style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "g" ]  # keyboard shortcut for this action
+
+  -
+    title: Show Kubist
+    string: "Cubism is a style of art that emerged in the early 20th century and is characterized by the use of geometric shapes, fragmented forms, and multiple viewpoints to create a complex and abstract image. Here is an example."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "h" ]  # keyboard shortcut for this action
+
+  -
+    title: Ask Van Gogh
+    string: "Do you want to try the Van Gogh style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "j" ]  # keyboard shortcut for this action
+
+  -
+    title: Show Van Gogh
+    string: "Van Gogh style of painting involves bold, dramatic brush strokes which expressed emotion. Here is an example."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "k" ]  # keyboard shortcut for this action
+
+  -
+    title: Ask Impressionist
+    string: "Do you want to try the Impressionist style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "l" ]  # keyboard shortcut for this action
+
+  -
+    title: Show Impressionist
+    string: "The characterizations of the style include small, visible brushstrokes that offer the bare impression of form, unblended color and an emphasis on the accurate depiction of natural light. Here is an example."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "z" ]  # keyboard shortcut for this action
+
+  -
+    title: Ask Renaissance
+    string: "Do you want to try the Abstract style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "x" ]  # keyboard shortcut for this action
+
+  -
+    title: Show Renaissance
+    string: "The Characteristics of the Renaissance include a renewed interest in classical antiquity."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "c" ]  # keyboard shortcut for this action
+
+  -
+    title: wanna pick?
+    string: "Do you want to pick this style?"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "v" ]  # keyboard shortcut for this action
+
+  -
+    title: sorry-no answer
+    string: "I'm sorry I dont know the answer to this."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "b" ]  # keyboard shortcut for this action
+
+  -
+    title: sorry-no answer2
+    string: "Thats a really good question, but I dont know the answer to this right now."
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "n" ]  # keyboard shortcut for this action
+
+  -
+    title: okay sure
+    string: "Okay sure!"
+    tooltip: "Plain message without annotations"
+    key_comb: [ "ctrl", "m" ]  # keyboard shortcut for this action
+
+painting_session:
+    # Avoid special characters in messages, this can break the backend.
+    # EG: Instead if a ', put &apos; into the message, which is the HTML symbol for the apostroph
+  -
+    title: Painting Session  # This will be shown in the GUI
     string: "This is just a simple message, no animations, no tags or annotations added."  # message pepper will say
     tooltip: "Plain message without annotations"  # tooltip for the button in UI
-    key_comb: ["ctrl", "9"]  # keyboard shortcut for this action
-  - 
-    title: Pitch annotation
-    string: "This is a message where we \\vct=150\\ change the pitch halfway through."
-    tooltip: "Voice pitch annotated change"
-    key_comb: ["ctrl", "2"]
-  -
-    title: Speed annotation
-    string: "This is a message where we \\rspd=50\\ change the speed halfway through."
-    tooltip: "Voice speed annotated change"
-    key_comb: ["ctrl", "3"]
-  -
-    title: Speech and animation
-    string: "Hello there! ^start(animations/Stand/Gestures/Hey_1) I am over here. ^wait(animations/Stand/Gestures/Hey_1)"
-    tooltip: "Hello there! ^start(animations/Stand/Gestures/Hey_1) I am over here. ^wait(animations/Stand/Gestures/Hey_1)"
-    key_comb: ["ctrl", "4"]
-  -
-    title: Suspended speech
-    string: "Look at me! ^run(animations/Stand/Gestures/ShowSky_8) I am this tall!"
-    tooltip: "Look at me! ^run(animations/Stand/Gestures/ShowSky_8) I am this tall!"
-    key_comb: ["ctrl", "5"]
-  -
-    title: Show tablet
-    string: "^start(animations/Stand/Gestures/ShowTablet_3) Look at my tablet. ^wait(animations/Stand/Gestures/ShowTablet_3)"
-    tooltip: "^start(animations/Stand/Gestures/ShowTablet_3) Look at my tablet. ^wait(animations/Stand/Gestures/ShowTablet_3)"
-    key_comb: ["ctrl", "6"]
-  -
-    title: Long sequence
-    string: "^start(animations/Stand/Gestures/Hey_1) Look over here. ^wait(animations/Stand/Gestures/Hey_1) I think ^start(animations/Stand/Waiting/ShowSky_1) there is a plane in the sky! ^wait(animations/Stand/Waiting/ShowSky_1)"
-    tooltip: "^start(animations/Stand/Gestures/ShowTablet_3) Look over here. ^wait(animations/Stand/Gestures/ShowTablet_3)"
-    key_comb: ["ctrl", "7"]
-  -
-    title: Peter Rabit
-    string: "static/tale_of_peter_rabit.txt"
-    tooltip: "The tale of Peter rabit"
-    key_comb: ["ctrl", "8"]
+    key_comb: ["ctrl", "3"]  # keyboard shortcut for this action
+
 
 
 volume: 0.5  # range: [0.0 - 1.0], default = 1
@@ -144,25 +268,14 @@ audio_files:
   # Check the README.md under section 'adding audio files'
   # A Button will be created for every item in the list
   -
-    title: Imperial March  # This will be shown in the GUI
-    location: /home/nao/sound_files/ImperialMarch60.wav  # absolute path on the Pepper
+    title: Spring  # This will be shown in the GUI
+    location: /home/nao/Music/springinmystep.wav # absolute path on the Pepper
     key_comb: ["alt", "1"]
-  - 
-    title: Cantina band
-    location: /home/nao/sound_files/CantinaBand60.wav
-    key_comb: ["alt", "2"]
+
   -
-    title: Star Wars
-    location: /home/nao/sound_files/StarWars60.wav
-    key_comb: ["alt", "3"]
-  - 
-    title: Pink Panther
-    location: /home/nao/sound_files/PinkPanther60.wav
-    key_comb: ["alt", "4"]
-  -
-    title: Elephant walking
-    location: /home/nao/sound_files/BabyElephantWalk60.wav
-    key_comb: ["alt", "5"]
+    title: Clearday  # This will be shown in the GUI
+    location: /home/nao/Music/bensound_clearday_track.wav  # absolute path on the Pepper
+    key_comb: [ "alt", "2" ]
 
 gestures: # Buttons will be created for every item in the list
   -
@@ -183,7 +296,7 @@ gestures: # Buttons will be created for every item in the list
   -
     title: "Me"
     gesture: "animations/Stand/Gestures/Me_1"
-    tooltip: "Me_1 gestzre"
+    tooltip: "Me_1 gesture"
     key_comb: ["shift", "4"]
   -
     title: "You"
@@ -269,3 +382,72 @@ random_anim:
 rotate_anim:
   duration: 4
   key_comb: ["ctrl", "alt", 3]
+
+sentences:
+    - Hi there! I'm PaintPal. It is such a nice day today. Do you want to paint?
+    - That's too bad. Are you sure? We could make something to show your loved ones when they visit. Are you still sure you dont want to paint?
+    - Alright, take care. I'm here if you need me.
+    - Cool, lets start making art. Do you want to draw with a pencil or use water colors?
+    - Sorry we only have these two mediums to paint now.
+    - Do you have the drawing tools in front of you?
+    - Do you have the drawing tools and colors in front of you?
+    - You should have a paper and a pencil.
+    - You should have a paper, a paint brush, some colors and water.
+    - Let me have the caretaker bring it for you.
+    - Now that we have everything ready, lets decide on what we want to paint today.
+    - Do you already have an art style in mind? Or would you like some suggestions?
+    - Do you want to try the Abstract style?
+    - Here is an example of abtract modern style of painting.Abstract art is art that does not attempt to represent an accurate depiction of a visual reality but instead use shapes, colours, forms and gestural marks to achieve its effect. Here is an example.
+    - Do you want to try the  Kubist Style?
+    - Cubism is a style of art that emerged in the early 20th century and is characterized by the use of geometric shapes, fragmented forms, and multiple viewpoints to create a complex and abstract image. Here is an example.
+    - Do you want to try the Van Gogh Style?
+    - Van Gogh's style of painting involved bold, dramatic brush strokes which express emotion and vivacity. The colorful lines create moving paintings. Here is an example.
+    - Do you want to try the Impressionist style?
+    - The impressionist movement was one of the transition styles from natural to modern art. The painters focused in their paintings on how they experienced a scene rather than what they specifically saw. Here is an example.
+    - Do you want to try the Renaissance style?
+    - The Renaissance was the peak period for realistic painting and drawing. Artists were inspired by examples from the classical age and created bold scenes on their canvas through movement, emotion and the use of light. Here is an example.
+    - Do you want to pick this style?
+    - I'm sorry I dont know the answer to this.
+    - Thats a really good question, but I dont know the answer to this right now.
+    - Okay sure!
+    - Okay, let's pick a topic now! Do you want to draw a specific topic? Or would you like to draw a personal picture?
+    - This is the picture that your relative shared with me, do you want to paint this?
+    - Would you like to see topics that are already in your chosen style? Or the original pictures?
+    - Great, what do you want to paint like a dog or a house? I will show you some nice examples of the same
+    - Give me a moment to find a nice picture.
+    - Do you want to paint this?
+    - Oh too bad! Lets try something else! Give me a moment.
+    - Now lets start painting!
+    - Here is the reference image.
+    - Do you wanna listen to music while you paint. You can ask me to stop anytime in between.
+    - Draw the basic shape of the object, but don't worry about the realism here. It's okay to take some liberties.
+    - Are you done with making the outline?
+    - Don't worry, you can do it. I trust you. I can help you more if you want.
+    - Nice work! Let's go to the next step.
+    - Once you are happy with the basic sketch, you can start filling in and refining your drawing. Look at the reference image shown on the tablet and add the shades and highlight.
+    - Are you done with adding tones?
+    - No worries! The painting is looking great so far, take your time!
+    - Nice work! Let's go to the next step.
+    - Now you can also add textures to the drawing.
+    - Are you done with adding textures?
+    - You can do it! I understand drawing can be difficult. Sometimes I mess up while drawing simple objects.
+    - Nice work! Let's go to the next step.
+    - Do you want to refine your painting more or do you want to end the painting session?
+    - I am so proud of you, this looks so beautiful. Now let me take a picture of this so I can share this with your loved one!
+    - You can see the painting in the tablet and maybe add more textures.
+    - Pick the color of the background and paint the whole surface
+    - Are you done with the background?
+    - No problem, try to pick a light color and see which undertones you can detect in the reference image. I'm here if you need me.
+    - Now you can make an outline of what you want to paint next. My suggestion is to use the different tone of the same color as the background. This will help you to easily modify it later on.
+    - Are you done making the outline?
+    - Don't worry! Take a closer look at the reference image, I'll wait for you!
+    - Good job! Let's go to the next step.
+    - Now that you have an outline, you can add details to your painting. Start with things that are farther away and then progress to the items that look closer.
+    - Are you done with adding the details?
+    - Keep going, you are doing great! Take a closer look at the picture!
+    - Do you want to refine your painting more or do you want to end the painting session?
+    - I am so proud of you, this looks so beautiful. Now let me take a picture of this so I can share this with your loved one! Can you please hold your picture for me?
+    - You can see the painting in the tablet and maybe add more details. Whatever feels right.
+    - Let me call the caretaker for you.
+    - Looks like we are running out of time today. See you in the next session. Bye. Take care.
+    - You did an amazing job, I am so proud of you. See you in the next session. Bye. Take care.
